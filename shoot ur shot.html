@@ -12,11 +12,17 @@
       padding: 20px;
       font-family: 'Quicksand', sans-serif;
       background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      min-height: 100vh;
+      font-weight: 300;
       display: flex;
-      align-items: center;
       justify-content: center;
-      min-height: 100vh; /* biar panjang, bukan fixed */
-      font-weight: 300; /* very light */
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .card {
       background: rgba(255, 255, 255, 0.9);
@@ -25,7 +31,6 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       padding: 30px 20px;
       text-align: center;
-      max-width: 500px;
       width: 100%;
       animation: popIn 1s ease;
     }
@@ -61,9 +66,10 @@
       line-height: 1.6;
       margin-top: 20px;
       color: #444;
-      font-weight: 400; /* Dancing Script is naturally light */
+      font-weight: 400;
       animation: fadeIn 1.5s ease forwards;
-      white-space: pre-line; /* biar enter di text keliatan */
+      white-space: pre-line;
+      text-align: left; /* biar lebih enak dibaca di hp */
     }
     @keyframes popIn {
       from { transform: scale(0.8); opacity: 0; }
@@ -82,8 +88,11 @@
       pointer-events: none;
       z-index: 0;
     }
-    /* biar mobile nyaman */
+    /* mobile tweaks */
     @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
       .card {
         padding: 20px 15px;
         border-radius: 15px;
@@ -100,17 +109,19 @@
 </head>
 <body>
   <canvas id="confetti"></canvas>
-  <div class="card">
-    <p>Gierta Natasya</p>
-    <button id="revealBtn">Open</button>
-    <div id="surpriseMsg" class="hidden surprise">
-      U know, I’ve been trying to come up with something clever, something Shakespeare would probably be proud of.  
-      But every time I think too hard, I just end up staring at u and forgetting the lines.  
-      So, instead of poetry or grand speeches, I’ll just say this...  
-      u make me laugh, u make me smile, and u make this whole world feel less complicated (joking, more complicated but fun).  
-      And honestly I really wanna do this in person, cause it will be more memorable and remembered…  
-      I don’t want to overthink it anymore, I’m gonna shoot my shot.  
-      So here is my question, plain and simple: Can I be yours?
+  <div class="container">
+    <div class="card">
+      <p>Gierta Natasya</p>
+      <button id="revealBtn">Open</button>
+      <div id="surpriseMsg" class="hidden surprise">
+        U know, I’ve been trying to come up with something clever, something Shakespeare would probably be proud of.  
+        But every time I think too hard, I just end up staring at u and forgetting the lines.  
+        So, instead of poetry or grand speeches, I’ll just say this...  
+        u make me laugh, u make me smile, and u make this whole world feel less complicated (joking, more complicated but fun).  
+        And honestly I really wanna do this in person, cause it will be more memorable and remembered…  
+        I don’t want to overthink it anymore, I’m gonna shoot my shot.  
+        So here is my question, plain and simple: Can I be yours?
+      </div>
     </div>
   </div>
 
