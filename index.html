@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Special Surprise</title>
+  <!-- Lighter, softer fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&family=Dancing+Script:wght@400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      font-weight: 300; /* very light */
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      padding: 40px;
+      text-align: center;
+      max-width: 500px;
+      animation: popIn 1s ease;
+    }
+    p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: #444;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 300;
+      cursor: pointer;
+      transition: transform 0.3s;
+      margin-top: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      font-family: 'Quicksand', sans-serif;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    .hidden {
+      display: none;
+    }
+    .surprise {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      line-height: 1.6;
+      margin-top: 20px;
+      color: #444;
+      font-weight: 400; /* Dancing Script is naturally light */
+      animation: fadeIn 1.5s ease forwards;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="card">
+    <p>Gierta Natasya</p>
+    <button id="revealBtn">Open </button>
+    <div id="surpriseMsg" class="hidden surprise">
+      U know, I’ve been trying to come up with something clever, something Shakespeare would probably be proud of.  
+      But every time I think too hard, I just end up staring at u and forgetting the lines.  
+      So, instead of poetry or grand speeches, I’ll just say this...  
+      u make me laugh, u make me smile, and u make this whole world feel less complicated (joking, more complicated but fun).  
+      And honestly I really wanna do this in person, cause it will be more memorable and remembered…  
+      I don’t want to overthink it anymore, I’m gonna shoot my shot.  
+      So here is my question, plain and simple:  Can I be yours? 
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('revealBtn');
+    const msg = document.getElementById('surpriseMsg');
+
+    btn.addEventListener('click', () => {
+      msg.classList.remove('hidden');
+      startConfetti();
+    });
+
+    // Confetti Effect
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let pieces = [];
+    const colors = ["#ff4b5c","#ffb400","#59c9a5","#4b7bec","#ff758c"];
+
+    function createPiece() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        size: Math.random() * 8 + 2,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        speed: Math.random() * 3 + 2
+      };
+    }
+
+    function startConfetti() {
+      pieces = Array.from({ length: 150 }, createPiece);
+      requestAnimationFrame(update);
+    }
+
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        p.y += p.speed;
+        if (p.y > canvas.height) {
+          p.y = -10;
+          p.x = Math.random() * canvas.width;
+        }
+      });
+      requestAnimationFrame(update);
+    }
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
